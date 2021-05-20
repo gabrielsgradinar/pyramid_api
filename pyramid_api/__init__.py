@@ -12,6 +12,8 @@ def main(global_config, **settings):
 
     config = Configurator(settings=settings)
 
+    config.include("cornice")
+
     config.add_route('welcome', '/')
     config.include(country_include, route_prefix='/countries')
     config.scan()

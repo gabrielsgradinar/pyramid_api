@@ -9,18 +9,22 @@ from pyramid_api.controller import (
 log = logging.getLogger(__name__)
 
 from pyramid.view import view_config, view_defaults
+from cornice import Service
+
+countries = Service(name='country',
+                 path='/teste',
+                 description="Countries")
 
 
+@countries.get(accept='application/json')
+def welcome(self):
+    log.debug('Na view welcome')
+    return {'message':'Bem vindo !!!'}
 
 @view_defaults(renderer='json')
 class CountryViews:
     def __init__(self, request) -> None:
         self.request = request
-
-    @view_config(route_name='welcome', request_method='GET')
-    def welcome(self):
-        log.debug('Na view welcome')
-        return {'message':'Bem vindo !!!'}
 
     @view_config(route_name='create', request_method='POST')
     def create_country(self):
