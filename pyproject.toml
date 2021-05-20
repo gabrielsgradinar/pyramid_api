@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "pyramid-api"
+version = "0.1.0"
+description = ""
+authors = ["Gabriel Gradinar <gabriel.gradinar@open-co.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pyramid = "^2.0"
+waitress = "^2.0.0"
+SQLAlchemy = "^1.4.15"
+pyramid-tm = "^2.4"
+"zope.sqlalchemy" = "^1.4"
+marshmallow = "^3.12.1"
+alembic = "^1.6.2"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[tool.poetry.plugins."paste.app_factory"]
+main = "pyramid_api:main"
+
+[tool.poetry.plugins."console_scripts"]
+initdb = "pyramid_api.initialize_db:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
