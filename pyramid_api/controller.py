@@ -1,7 +1,8 @@
 import transaction
 from typing import List
 from pyramid.request import Request
-from pyramid_api.models import Country, CountrySchema, DBSession
+from pyramid_api.models import Country, DBSession
+from pyramid_api.schemas import CountrySchema
 
 
 def create_country(request: Request) -> Country:

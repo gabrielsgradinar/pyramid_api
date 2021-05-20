@@ -1,10 +1,8 @@
 from sqlalchemy import Column, Integer, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
-from sqlalchemy.sql.sqltypes import BigInteger, Float
+from sqlalchemy.sql.sqltypes import BigInteger
 from zope.sqlalchemy import register
-from marshmallow import Schema, fields
-
 
 DBSession = scoped_session(sessionmaker())
 register(DBSession)
@@ -25,10 +23,3 @@ class Country(Base):
         self.currency = currency
 
 
-class CountrySchema(Schema):
-    class Meta:
-        ordered = True 
-
-    name = fields.Str()
-    official_language = fields.Str()
-    population = fields.Int()
