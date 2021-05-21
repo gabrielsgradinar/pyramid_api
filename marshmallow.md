@@ -5,21 +5,21 @@
  - Serialização dos objetos da aplicação para tipos primitivos do Python, como a utilização para retornar objetos JSON em uma API.
  
 
-## Instalando Alembic
+## Instalando Marshmallow
 
      - poetry add marshmallow
 
 ## Utilização
 
- - Criando primeiro `shema`
+ - Criando primeiro `Schema`
     ```py
     from marshmallow import Schema, fields
     
     class CountrySchema(Schema):
 
-        name = fields.Str()
-        official_language = fields.Str()
-        population = fields.Int()
+        name = fields.Str(required=True)
+        official_language = fields.Str(required=True)
+        population = fields.Int(required=True)
     ``` 
  - Serialização dos objetos
    - Para fazer a serialização de um objeto, passamos um objeto para a função `dump`, que retorna um json formatado 
@@ -128,5 +128,3 @@ def create_country(request):
     return CountrySchema().dump(country)
 
 ```
-
-  
