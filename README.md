@@ -1,10 +1,11 @@
 # PYRAMID API
 
 Esse projeto tem como intuito colocar em prática alguns conteudos que venho estudando, que são:
- - [ ] Framework `Pyramid`
+ - [x] Framework `Pyramid`
  - [x] Gerenciador de dependências [`Poetry`](poetry.md)
  - [x] Migração do banco de dados com [`Alembic`](alembic.md)
- - [ ] ORM `SQLAlchemy`
+ - [x] Validação de Schema / Serialização de objetos com [`Marshmallow`](marshmallow.md)
+ - [x] ORM `SQLAlchemy`
  - [ ] Mensageria com `Celery`
  - [ ] Docker
 
