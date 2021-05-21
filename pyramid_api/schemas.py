@@ -5,6 +5,6 @@ class CountrySchema(Schema):
     class Meta:
         ordered = True 
 
-    name = fields.Str()
-    official_language = fields.Str()
-    population = fields.Int()
+    name = fields.Str(required=True)
+    official_language = fields.Str(required=True)
+    population = fields.Int(required=True)

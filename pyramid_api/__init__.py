@@ -12,6 +12,8 @@ def main(global_config, **settings):
 
     config = Configurator(settings=settings)
 
+    config.configure_celery(global_config['__file__'])
+
     config.include("cornice")
 
     config.add_route('welcome', '/')
