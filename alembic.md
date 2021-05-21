@@ -53,6 +53,7 @@
     from mymodel import Base
     target_metadata = [Base.metadata]
     ```
-    - Esse `Base` contem o objeto `MetaData` que contem os objetos `Table` que definem o bando de dados
+    - Esse `Base` contem o objeto `MetaData` que contem os objetos `Table` que definem o bando de dados.
+  
 - `alembic upgrade head` - Axecuta a migração da revisão mais recente do banco (`head`) com tudo oque foi definido na função `upgrade` do script.
-- `alembic history --verbose` - mostra os histórico das migrações to vários detalhes, como a descrição e a data de criação da revisão.
+- `alembic history --verbose` - mostra os histórico das migrações com vários detalhes, como a descrição e a data de criação da revisão.
