@@ -1,4 +1,4 @@
-# Mashmallow
+# Marshmallow
  - É independente do ORM/Framework utilizado
  - Fornece validação de dados de entrada.
  - Desserialização dos dados de entrada para os objetos da aplicação.
@@ -64,12 +64,69 @@
     ```
 ### Para serializar uma lista de objetos é so passar a flag many=True para a função `dump`, o mesmo funciona para desserializar com `load`.
 
-# Validação nas APIs - Mashmallow + Cornice
+# Validação nas APIs - Marshmallow + Cornice
 
-# Introdução rápida ao Cornice 🚴
+## Introdução rápida ao Cornice 🚴
 
  - É um framework REST para o Pyramid
  - Ele possui vários modulos para ajudar na criação e na documentação de REST APIs
 
+
+## Configurando cornice no pyramid
+
+ - Adicionar o Cornice no Configurator 
+```py
+config = Configurator(settings=settings)
+config.include("cornice")
+```
+## Criando um serviço no Cornice usando a validação do Marshmallow
+
+```py
+from cornice import Service
+from cornice.validators import marshmallow_body_validator
+
+
+# Criação do Service
+countries = Service(name='country', path='/country', description="Country CRUD")
+
+# Utilizamos o Service criado como decorator para criar as funções de acordo com os verbos HTTP
+# Então a partir do @countries podemos usar .get, .put, .post, etc.
+
+
+# No decorator passamos o tipo do validador (marshmallow_body_validator) e qual o schema que será validado(CountrySchema)
+# Assim caso o request não esteja em padrão com schema, será retornado um 400 formatado com o erro da validação, mostrando oque está errado
+# Por exemplo, caso o campo population, que está como obrigatório no schema, não for passado
+"""
+    {
+        "status": "error",
+        "errors": [
+            {
+                "location": "body",
+                "name": "population",
+                "description": [
+                    "Missing data for required field."
+                ]
+            }
+        ]
+    }
+"""
+# Os validares funcionam usando o dicionário request.validated
+@countries.post(
+    accept='application/json',
+    schema=CountrySchema,
+    validators=(marshmallow_body_validator,)
+)
+def create_country(request):
+
+    country = Country(
+       name=request.validated['name'],
+       official_language=request.validated['official_language'],
+       population=request.validated['population'],
+       currency=request.validated['currency'],
+    )
+
+    return CountrySchema().dump(country)
+
+```
 
   

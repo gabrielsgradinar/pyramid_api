@@ -1,4 +1,6 @@
 import logging
+from pyramid_api.models import Country
+from pyramid_api.schemas import CountrySchema
 from pyramid_api.controller import (
     create_country,
     delete_country, 
@@ -10,16 +12,26 @@ log = logging.getLogger(__name__)
 
 from pyramid.view import view_config, view_defaults
 from cornice import Service
+from cornice.validators import marshmallow_body_validator
 
-countries = Service(name='country',
-                 path='/teste',
-                 description="Countries")
+countries = Service(name='country', path='/country', description="Country CRUD")
 
 
-@countries.get(accept='application/json')
-def welcome(self):
-    log.debug('Na view welcome')
-    return {'message':'Bem vindo !!!'}
+@countries.post(
+    accept='application/json',
+    schema=CountrySchema,
+    validators=(marshmallow_body_validator,)
+)
+def create_country_cornice(request):
+
+    country = Country(
+       name=request.validated['name'],
+       official_language=request.validated['official_language'],
+       population=request.validated['population'],
+       currency=request.validated['currency'],
+    )
+
+    return CountrySchema().dump(country)
 
 @view_defaults(renderer='json')
 class CountryViews:

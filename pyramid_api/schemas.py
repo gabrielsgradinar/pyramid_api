@@ -8,3 +8,4 @@ class CountrySchema(Schema):
     name = fields.Str(required=True)
     official_language = fields.Str(required=True)
     population = fields.Integer(required=True)
+    currency = fields.Str(required=True)
