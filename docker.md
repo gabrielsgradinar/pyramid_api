@@ -10,4 +10,3 @@
 
 ### Image
     - Comando para buildar a imagem a partir do Dockerfile: docker build -t "nome_da_imagem" caminho_da_pasta_onde_o_dockerfile_esta
-    - 
