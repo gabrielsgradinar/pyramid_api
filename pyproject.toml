@@ -18,6 +18,7 @@ celery = "^5.0.5"
 pyramid-celery = "^4.0.0"
 redis = "^3.5.3"
 ipython = "^7.23.1"
+gunicorn = "^20.1.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

@@ -1,21 +1,19 @@
 FROM python:3.8.5
 
-WORKDIR /usr/app
-
-COPY pyproject.toml .
-COPY poetry.lock .
-
 RUN apt-get update
 RUN apt-get upgrade -y
 
-RUN pip install --upgrade pip poetry
+RUN pip install --upgrade pip poetry gunicorn paste pastedeploy
 
-COPY . .
+COPY pyproject.toml /app/
+COPY poetry.lock /app/
+
+WORKDIR /app
 
 RUN poetry install
 
-RUN ls
+COPY . /app/
 
+RUN poetry install
 
-CMD [ "make", "run-serve" ]
-
+CMD [ "make", "run-serve"]
