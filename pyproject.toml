@@ -14,7 +14,7 @@ pyramid-tm = "^2.4"
 marshmallow = "^3.12.1"
 alembic = "^1.6.2"
 cornice = "^5.2.0"
-celery = "^5.0.5"
+celery = {extras = ["redis"], version = "^5.1.2"}
 pyramid-celery = "^4.0.0"
 redis = "^3.5.3"
 ipython = "^7.23.1"
