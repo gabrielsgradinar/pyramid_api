@@ -7,7 +7,7 @@ Esse projeto tem como intuito colocar em prática alguns conteudos que venho est
  - [x] Validação de Schema / Serialização de objetos com [`Marshmallow`](marshmallow.md)
  - [x] ORM `SQLAlchemy`
  - [ ] Filas com `Celery`
- - [ ] Docker e Docker-compose
+ - [ ] [`Docker e Docker-compose`](docker.md)
 
 Para cada um desse tópicos quero criar uma mini wiki com alguns pontos que acho relevante e tentar explicar sobre eles.
 
