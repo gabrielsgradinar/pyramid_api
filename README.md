@@ -6,8 +6,8 @@ Esse projeto tem como intuito colocar em prática alguns conteudos que venho est
  - [x] Migração do banco de dados com [`Alembic`](alembic.md)
  - [x] Validação de Schema / Serialização de objetos com [`Marshmallow`](marshmallow.md)
  - [x] ORM `SQLAlchemy`
- - [ ] Mensageria com `Celery`
- - [ ] Docker
+ - [ ] Filas com `Celery`
+ - [ ] Docker e Docker-compose
 
 Para cada um desse tópicos quero criar uma mini wiki com alguns pontos que acho relevante e tentar explicar sobre eles.
 
