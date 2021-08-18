@@ -1,6 +1,6 @@
 import os
 import sys
-from pyramid_api.models import Base
+from pyramid_api.models.country import Base
 from pyramid.paster import get_appsettings
 from pyramid.scripts.common import parse_vars
 from sqlalchemy import engine_from_config

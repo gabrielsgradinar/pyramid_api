@@ -1,25 +1,18 @@
+from pyramid_api.tasks import create_country_task
 import transaction
 from typing import List
 from pyramid.request import Request
-from pyramid_api.models import Country, DBSession
-from pyramid_api.schemas import CountrySchema
+from pyramid_api.models.country import Country, DBSession
+from pyramid_api.api.schemas.country import CountrySchema
 
 
 def create_country(request: Request) -> Country:
-    new_country = Country(
-        name=request.json_body['name'], 
-        official_language=request.json['official_language'],
-        population=request.json['population']
-    )
 
-    with transaction.manager:
-        DBSession.add(new_country)
+    country_request = request.json_body
 
-    return CountrySchema().dump(
-        DBSession.query(Country).filter_by(
-            name=request.json_body['name']
-        ).one()
-    )
+    create_country_task.delay(country_request)
+
+    return country_request['name'] 
 
 
 def list_countries() -> List[Country]:
@@ -50,9 +43,7 @@ def update_country(request: Request) -> Country:
 
 
     return CountrySchema().dump(
-        DBSession.query(Country).filter_by(
-            id=id
-        ).one()
+        DBSession.query(Country).filter_by(id=id).one()
     )
 
 def delete_country(request: Request):

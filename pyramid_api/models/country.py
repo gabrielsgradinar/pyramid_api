@@ -16,10 +16,5 @@ class Country(Base):
     population = Column(BigInteger)
     currency = Column(Text)
 
-    def __init__(self, name, official_language, population, currency) -> None:
-        self.name = name
-        self.official_language = official_language
-        self.population = population
-        self.currency = currency
 
 

@@ -2,7 +2,7 @@ from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
-from pyramid_api.models import Base
+from pyramid_api.models.country import Base
 from alembic import context
 
 # this is the Alembic Config object, which provides

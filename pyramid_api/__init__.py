@@ -1,7 +1,7 @@
 __version__ = '0.1.0'
 
-from pyramid_api.views import country_include
-from pyramid_api.models import Base, DBSession
+from pyramid_api.api.resources.country import country_include
+from pyramid_api.models.country import Base, DBSession
 from pyramid.config import Configurator
 from sqlalchemy import engine_from_config
 
@@ -15,8 +15,9 @@ def main(global_config, **settings):
     config.configure_celery(global_config['__file__'])
 
     config.include("cornice")
+    config.include('pyramid_celery')
+    config.configure_celery(global_config['__file__'])
 
-    config.add_route('welcome', '/')
     config.include(country_include, route_prefix='/countries')
     config.scan()
     

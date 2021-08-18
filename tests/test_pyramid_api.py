@@ -1,6 +1,5 @@
 from pyramid import testing
-from zope.interface.interface import Method
-from pyramid_api.views import CountryViews
+from pyramid_api.api.resources.country import CountryViews
 
 def test_welcome():
     request = testing.DummyRequest()

@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+    postgresql-db:
+        image: postgres
+        container_name: postgresql
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=1337
+            - POSTGRES_DB=pyramid_api
+        ports: 
+            - "5432:5432"
+
+    redis:  
+        image: redis
+        ports:
+            - "6379:6379"
