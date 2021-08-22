@@ -1,13 +1,22 @@
 from pyramid import testing
 from pyramid_api.api.resources.country import CountryViews
 
+
 def test_welcome():
     request = testing.DummyRequest()
-    response = CountryViews(request).welcome()
-    assert response['content'] == 'Bem vindo !!!'
+    response = CountryViews(request).hello()
+
+    print("content", response)
+
+    assert response.status_code == 200
 
 def test_create_country():
-    request = testing.DummyRequest(method='POST', json_body={"name": "Brasil"})
+    request = testing.DummyRequest(method='POST', json_body={
+        "name": "Brasil",
+        "official_language": "Português",
+        "population": 4321
+        }
+    )
     response = CountryViews(request).create_country()
     assert response['content'] ==  'Criou'
     assert response['body']['name'] == 'Brasil'

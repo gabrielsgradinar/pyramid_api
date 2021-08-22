@@ -8,7 +8,7 @@ from pyramid_api.models import (
 )
 logging = logging.getLogger(__name__)
 
-from pyramid.httpexceptions import HTTPOk
+from pyramid.httpexceptions import HTTPBadGateway, HTTPBadRequest, HTTPError, HTTPOk
 
 from pyramid.view import view_config, view_defaults
 
@@ -67,7 +67,11 @@ class CountryViews:
     def delete_country(self):
         logging.debug('Na view delete')
 
-        deleted_country = delete_country(self.request)
+        try: 
+            deleted_country = delete_country(self.request)     
+        except HTTPError as e:
+            return HTTPBadRequest(e.message)
+
         return{
             'content': 'Deleted !!',
             'body': deleted_country
