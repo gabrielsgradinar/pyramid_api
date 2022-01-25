@@ -8,6 +8,7 @@ DBSession = scoped_session(sessionmaker())
 register(DBSession)
 Base = declarative_base()
 
+
 class Country(Base):
     __tablename__ = 'countries'
     id = Column(Integer, primary_key=True)
@@ -15,6 +16,3 @@ class Country(Base):
     official_language = Column(Text)
     population = Column(BigInteger)
     currency = Column(Text)
-
-
-

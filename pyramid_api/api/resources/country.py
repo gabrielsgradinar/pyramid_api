@@ -1,16 +1,14 @@
+from pyramid.view import view_config, view_defaults
+from pyramid.httpexceptions import HTTPBadRequest, HTTPError, HTTPOk
 import logging
 from pyramid_api.models import (
     create_country,
-    delete_country, 
-    get_country, 
-    list_countries, 
+    delete_country,
+    get_country,
+    list_countries,
     update_country
 )
 logging = logging.getLogger(__name__)
-
-from pyramid.httpexceptions import HTTPBadGateway, HTTPBadRequest, HTTPError, HTTPOk
-
-from pyramid.view import view_config, view_defaults
 
 
 @view_defaults(renderer='json')
@@ -18,7 +16,7 @@ class CountryViews:
     def __init__(self, request) -> None:
         self.request = request
 
-    @view_config(route_name='hello',request_method='GET')
+    @view_config(route_name='hello', request_method='GET')
     def hello(self):
 
         return HTTPOk('Wellcome to Pyramid Countries API')
@@ -29,31 +27,31 @@ class CountryViews:
 
         country = create_country(self.request)
         return {
-            'content':'Created !!',
+            'content': 'Created !!',
             'result': country
         }
 
-    @view_config(route_name='get',request_method='GET')
+    @view_config(route_name='get', request_method='GET')
     def get_country(self):
         logging.debug('Na view get')
 
         countries = get_country(self.request)
         return {
-            'content':'Ok',
+            'content': 'Ok',
             'result': countries
         }
 
-    @view_config(route_name='get_list',request_method='GET')
+    @view_config(route_name='get_list', request_method='GET')
     def get_countries(self):
         logging.debug('Na view get_list')
-        
+
         countries = list_countries()
         return {
-            'content':'Ok',
+            'content': 'Ok',
             'result': countries
         }
 
-    @view_config(route_name='update',request_method='PUT')
+    @view_config(route_name='update', request_method='PUT')
     def update_country(self):
         logging.debug('Na view update')
 
@@ -63,12 +61,12 @@ class CountryViews:
             'result': updated_country
         }
 
-    @view_config(route_name='delete',request_method='DELETE')
+    @view_config(route_name='delete', request_method='DELETE')
     def delete_country(self):
         logging.debug('Na view delete')
 
-        try: 
-            deleted_country = delete_country(self.request)     
+        try:
+            deleted_country = delete_country(self.request)
         except HTTPError as e:
             return HTTPBadRequest(e.message)
 

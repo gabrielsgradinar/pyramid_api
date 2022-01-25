@@ -12,15 +12,15 @@ def create_country(request: Request) -> Country:
     country_request = request.json_body
 
     new_country = Country(
-        name=country_request['name'], 
+        name=country_request['name'],
         official_language=country_request['official_language'],
         population=country_request['population']
     )
 
-    #with transaction.manager:
+    # with transaction.manager:
     DBSession.add(new_country)
 
-    return country_request['name'] 
+    return country_request['name']
 
 
 def list_countries() -> List[Country]:
@@ -29,6 +29,7 @@ def list_countries() -> List[Country]:
 
     return CountrySchema().dump(countries, many=True)
 
+
 def get_country(request: Request) -> Country:
     id = request.matchdict.get('id', "")
 
@@ -36,8 +37,9 @@ def get_country(request: Request) -> Country:
 
     return CountrySchema().dump(country)
 
+
 def update_country(request: Request) -> Country:
-    
+
     id = request.json_body['id']
 
     for campo in request.json_body:
@@ -49,10 +51,10 @@ def update_country(request: Request) -> Country:
     with transaction.manager:
         DBSession.query(Country).filter(Country.id == id).update(campos)
 
-
     return CountrySchema().dump(
         DBSession.query(Country).filter_by(id=id).one()
     )
+
 
 def delete_country(request: Request):
 
@@ -62,9 +64,10 @@ def delete_country(request: Request):
         raise HTTPBadRequest("Id cannot be null")
 
     with transaction.manager:
-        deleted = DBSession.query(Country).filter(Country.id == country_id).delete()
+        deleted = DBSession.query(Country).filter(
+            Country.id == country_id).delete()
 
     if deleted == 0:
         raise HTTPBadRequest(f"No contry to delete with id {country_id}")
-    
+
     return deleted

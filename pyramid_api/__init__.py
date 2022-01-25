@@ -5,6 +5,7 @@ from pyramid_api.models.country import Base, DBSession
 from pyramid.config import Configurator
 from sqlalchemy import engine_from_config
 
+
 def main(global_config, **settings):
     engine = engine_from_config(settings, 'sqlalchemy.')
     DBSession.configure(bind=engine)
@@ -20,5 +21,5 @@ def main(global_config, **settings):
 
     config.include(country_include, route_prefix='/countries')
     config.scan()
-    
+
     return config.make_wsgi_app()
