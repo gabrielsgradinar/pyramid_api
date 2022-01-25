@@ -12,15 +12,15 @@ def create_country(request: Request) -> Country:
     country_request = request.json_body
 
     new_country = Country(
-        name=country_request['name'],
-        official_language=country_request['official_language'],
-        population=country_request['population']
+        name=country_request["name"],
+        official_language=country_request["official_language"],
+        population=country_request["population"],
     )
 
     # with transaction.manager:
     DBSession.add(new_country)
 
-    return country_request['name']
+    return country_request["name"]
 
 
 def list_countries() -> List[Country]:
@@ -31,7 +31,7 @@ def list_countries() -> List[Country]:
 
 
 def get_country(request: Request) -> Country:
-    id = request.matchdict.get('id', "")
+    id = request.matchdict.get("id", "")
 
     country = DBSession.query(Country).filter_by(id=id).one()
 
@@ -40,7 +40,7 @@ def get_country(request: Request) -> Country:
 
 def update_country(request: Request) -> Country:
 
-    id = request.json_body['id']
+    id = request.json_body["id"]
 
     for campo in request.json_body:
         if campo == "" or campo == "id":
@@ -51,21 +51,18 @@ def update_country(request: Request) -> Country:
     with transaction.manager:
         DBSession.query(Country).filter(Country.id == id).update(campos)
 
-    return CountrySchema().dump(
-        DBSession.query(Country).filter_by(id=id).one()
-    )
+    return CountrySchema().dump(DBSession.query(Country).filter_by(id=id).one())
 
 
 def delete_country(request: Request):
 
     try:
-        country_id = request.json_body['id']
+        country_id = request.json_body["id"]
     except JSONDecodeError:
         raise HTTPBadRequest("Id cannot be null")
 
     with transaction.manager:
-        deleted = DBSession.query(Country).filter(
-            Country.id == country_id).delete()
+        deleted = DBSession.query(Country).filter(Country.id == country_id).delete()
 
     if deleted == 0:
         raise HTTPBadRequest(f"No contry to delete with id {country_id}")

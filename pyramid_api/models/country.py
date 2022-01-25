@@ -10,7 +10,7 @@ Base = declarative_base()
 
 
 class Country(Base):
-    __tablename__ = 'countries'
+    __tablename__ = "countries"
     id = Column(Integer, primary_key=True)
     name = Column(Text, unique=True)
     official_language = Column(Text)

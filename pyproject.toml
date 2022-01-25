@@ -24,8 +24,9 @@ WebTest = "^3.0.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
-flake8 = "^4.0.1"
 autopep8 = "^1.6.0"
+black = "^21.12b0"
+flake8 = "^4.0.1"
 
 [tool.poetry.plugins."paste.app_factory"]
 main = "pyramid_api:main"
