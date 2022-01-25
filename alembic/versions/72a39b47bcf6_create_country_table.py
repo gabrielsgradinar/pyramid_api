@@ -1,7 +1,7 @@
 """create country table
 
 Revision ID: 72a39b47bcf6
-Revises: 
+Revises:
 Create Date: 2021-05-19 10:16:18.656786
 
 """

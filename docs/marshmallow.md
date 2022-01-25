@@ -3,7 +3,7 @@
  - Fornece validação de dados de entrada.
  - Desserialização dos dados de entrada para os objetos da aplicação.
  - Serialização dos objetos da aplicação para tipos primitivos do Python, como a utilização para retornar objetos JSON em uma API.
- 
+
 
 ## Instalando Marshmallow
 
@@ -14,18 +14,18 @@
  - Criando primeiro `Schema`
     ```py
     from marshmallow import Schema, fields
-    
+
     class CountrySchema(Schema):
 
         name = fields.Str(required=True)
         official_language = fields.Str(required=True)
         population = fields.Int(required=True)
-    ``` 
+    ```
  - Serialização dos objetos
-   - Para fazer a serialização de um objeto, passamos um objeto para a função `dump`, que retorna um json formatado 
+   - Para fazer a serialização de um objeto, passamos um objeto para a função `dump`, que retorna um json formatado
         ```py
         new_country = Country(
-            name='Brasil', 
+            name='Brasil',
             official_language='Português',
             population=211755692
         )
@@ -74,7 +74,7 @@
 
 ## Configurando cornice no pyramid
 
- - Adicionar o Cornice no Configurator 
+ - Adicionar o Cornice no Configurator
 ```py
 config = Configurator(settings=settings)
 config.include("cornice")

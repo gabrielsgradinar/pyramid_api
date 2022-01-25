@@ -15,13 +15,13 @@
         alembic
         |____env.py
         │____README.md
-        │____fscript.py.mako  
+        │____fscript.py.mako
         │
         └───versions
             │____migration_script_01.py
 
         ```
-    - No arquivo .ini temos que configurar a conexão com o banco mudando o `sqlalchemy.url` com a url correta. ex: 
+    - No arquivo .ini temos que configurar a conexão com o banco mudando o `sqlalchemy.url` com a url correta. ex:
         ```
         sqlalchemy.url = mysql+mysqldb://root:root@localhost:3306/database_name
         ```
@@ -54,6 +54,6 @@
     target_metadata = [Base.metadata]
     ```
     - Esse `Base` contem o objeto `MetaData` que contem os objetos `Table` que definem o bando de dados.
-  
+
 - `alembic upgrade head` - Axecuta a migração da revisão mais recente do banco (`head`) com tudo oque foi definido na função `upgrade` do script.
 - `alembic history --verbose` - mostra os histórico das migrações com vários detalhes, como a descrição e a data de criação da revisão.
